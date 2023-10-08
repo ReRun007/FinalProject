@@ -1,7 +1,7 @@
 
 <?php 
     session_start();
-    require_once 'config/db.php';
+    require_once '../config/db.php';
 
     if (isset($_POST['signin'])){
         $email = $_POST['email'];
@@ -29,8 +29,8 @@
                 if($check_data->rowCount() > 0){
                     if($email == $row['email']){
                         if(password_verify($password,$row['password'])){
-                            $_SESSION['customer_login'] = $row['id'];
-                            header("lcation:main.php"); 
+                            $_SESSION['customer_login'] = $row['customer_id'];
+                            header("location:../c_Interface/c_main.php"); 
                         }else{
                             $_SESSION['error'] = "รหัสผิด" ;
                             header("location:signin.php");
@@ -40,7 +40,7 @@
                         header("location:signin.php");
                     }
                 }else{
-                    $_SESSION['error'] = "มีบางอย่างผิดพลาด" ;
+                    $_SESSION['error'] = "ไม่มีข้อมูลในระบบ" ;
                     header("location:signin.php");
                 }
             } catch(PDOException $e){

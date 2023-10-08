@@ -1,3 +1,9 @@
+<?php
+    require_once '../config/bs5.php';
+    require_once '../config/db.php';
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,6 +11,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+
+    <?php    
+        if(isset($_SESSION['customer_login'])){
+        $customer_id = $_SESSION['customer_login'];
+        $stmt = $conn->query("SELECT * FROM customers WHERE customer_id = $customer_id" );
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC); 
+        }
+    ?>
+
     <header class="sticky-top p-3 text-bg-dark">
         <!-- โค้ดของ <header> จากไฟล์เดิม -->
             <div class="container">
@@ -25,9 +41,19 @@
                     <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search">
                   </form>
           
-                  <div class="text-end">
-                    <a href="../customerLogin/signin.php"><button type="button" class="btn btn-outline-light me-2">Login</button></a>
-                    <a href="../customerLogin/signup.php"><button type="button" class="btn btn-warning" >Sign-up</button></a>
+                  <div class="dropdown text-end">
+                    <a href="#" class="d-block link-light link-offset-2 text-decoration-none dropdown-toggle " data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                        <?php echo $row['firstname']; ?> 
+                        
+                    </a>
+                    <ul class="dropdown-menu text-small" style="">
+                        <li><a class="dropdown-item" href="#">New project...</a></li>
+                        <li><a class="dropdown-item" href="#">Settings</a></li>
+                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">Sign out</a></li>
+                    </ul>
                   </div>
                 </div>
               </div>
