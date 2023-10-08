@@ -12,7 +12,43 @@
         $email = $_POST['email'];
         $password = $_POST['password'];
         $c_password = $_POST['confirmPassword'];
+        // เลือกเอาไฟล์รูปหรือเอา Avatar มาใช้
+        $a = $_POST['profile_type'];
+        if ($a == 'A') {
+            // ถ้าเลือก Avatar
+            $img_URL = $_POST['img_URL'];
+            //echo ' Avatar: ' . $img_URL;
+        } elseif ($a == 'B') {
+//----------------------------เอาไปใช้ต่อด้วย----------------------------------------------------------
+            // ฟังก์ชั่นเมื่ออัพโหลดไฟล์
+            //echo 'Upload: ' . $img_URL;
+            $targetDir = "../images/customer";
+            if(!empty($_FILES["file"]["name"]))
+            $fileName = basename($_FILES["file"]["name"]);
+            $targetFilePath = $targetDir.$fileName;
+            $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
+            //Allow certain file formats
+            $allowTypes = array('jpg','png','jpeg','gif');
+            if(in_array($fileType, $allowTypes)){
+                if(move_uploaded_file($_FILES['file']['tmp_name'], $targetFilePath)){
+                    $img_URL = $fileName;
+                }else{
+                    $_SESSION['error'] = "Upload File ERROR";
+                    header("location:signup.php");
+                }
+            }else{
+                $_SESSION['error'] = "File Type ไม่ตรงกับที่กำหนด";
+                header("location:signup.php");
+            }
 
+        } else {
+            $_SESSION['error'] = "การเลือก Upload รูปภาพไม่สมบูรณ์";
+            header("location:signup.php");
+            //echo 'เอ๋อ';
+        }
+        
+        
+        //เช็คความผิดพลาดต่างๆ
         if(empty($firstname)){
             $_SESSION['error'] = "กรอกชื่อด้วยจ้า";
             header("location:signup.php");
@@ -62,8 +98,8 @@
                     header("location:signup.php");
                 } else if (!isset($_SESSION['error'])){
                     $passwordHash = password_hash($password,PASSWORD_DEFAULT);
-                    $stmt = $conn->prepare("INSERT INTO customers(firstname, lastname, email, username, password, phone_number, address) 
-                        VALUES (:firstname,:lastname,:email,:username,:passwordHash,:phone_number,:address)");
+                    $stmt = $conn->prepare("INSERT INTO customers(firstname, lastname, email, username, password, phone_number, address,img_URL) 
+                        VALUES (:firstname,:lastname,:email,:username,:passwordHash,:phone_number,:address,:img_URL)");
                     $stmt->bindParam(":firstname", $firstname);
                     $stmt->bindParam(":lastname", $lastname);
                     $stmt->bindParam(":email", $email);
@@ -71,6 +107,7 @@
                     $stmt->bindParam(":passwordHash", $passwordHash);
                     $stmt->bindParam(":phone_number", $phone_number);
                     $stmt->bindParam(":address", $address);
+                    $stmt->bindParam(":img_URL", $img_URL);
                     $stmt->execute();
                     $_SESSION['success'] = "สมัครสมาชิกเรียบร้อยแล้ว! <a href='signin.php' class='alert-link'>คลิกที่นี่</a> เพื่อเข้าสู่ระบบ" ;
                     header("location:signup.php");

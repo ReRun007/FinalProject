@@ -12,3 +12,11 @@ if ($a == 'A') {
     echo 'คุณไม่ได้เลือกประเภทโปรไฟล์';
 }
 ?>
+
+<?php 
+
+    require_once '../config/db.php';
+
+    $targetDir = "../images/customer";
+
+?>

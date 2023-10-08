@@ -17,7 +17,7 @@
     <div class="container">
         <h3 class="mt-4">สมัครสมาชิก</h3>
         <hr>
-        <form action="test.php" method="post">
+        <form action="signup_db.php" method="post">
 
             <!-- เรียกใช้ seesion -->
             <?php if(isset($_SESSION['error'])){ ?>
@@ -92,33 +92,33 @@
                 <div class="mb-3">
                     <label for="avatar" class="form-label">เลือกรูป Avatar</label>
                     <div class="avatar-grid" >
-                        <input type="radio" name="img_URL" value="../images/avatar/a01" id="avatar1" style="display: none;">
+                        <input type="radio" name="img_URL" value="../images/avatar/a01.jpg" id="avatar1" style="display: none;">
                         <label for="avatar1"><img src="../images/avatar/a01.jpg" alt="Avatar 1" width="150" height="150"></label>
 
-                        <input type="radio" name="img_URL" value="../images/avatar/a02" id="avatar2" style="display: none;">
+                        <input type="radio" name="img_URL" value="../images/avatar/a02.jpg" id="avatar2" style="display: none;">
                         <label for="avatar2"><img src="../images/avatar/a02.jpg" alt="Avatar 2" width="150" height="150"></label>
 
-                        <input type="radio" name="img_URL" value="../images/avatar/a03" id="avatar3" style="display: none;">
+                        <input type="radio" name="img_URL" value="../images/avatar/a03.jpg" id="avatar3" style="display: none;">
                         <label for="avatar3"><img src="../images/avatar/a03.jpg" alt="Avatar 3" width="150" height="150"></label>
                     </div><br>
                     <div class="avatar-grid">
-                        <input type="radio" name="img_URL" value="../images/avatar/a04" id="avatar4" style="display: none;">
+                        <input type="radio" name="img_URL" value="../images/avatar/a04.jpg" id="avatar4" style="display: none;">
                         <label for="avatar4"><img src="../images/avatar/a04.jpg" alt="Avatar 4" width="150" height="150"></label>
 
-                        <input type="radio" name="img_URL" value="../images/avatar/a05" id="avatar5" style="display: none;">
+                        <input type="radio" name="img_URL" value="../images/avatar/a05.jpg" id="avatar5" style="display: none;">
                         <label for="avatar5"><img src="../images/avatar/a05.jpg" alt="Avatar 5" width="150" height="150"></label>
 
-                        <input type="radio" name="img_URL" value="../images/avatar/a06" id="avatar6" style="display: none;"> 
+                        <input type="radio" name="img_URL" value="../images/avatar/a06.jpg" id="avatar6" style="display: none;"> 
                         <label for="avatar6"><img src="../images/avatar/a06.jpg" alt="Avatar 6" width="150" height="150"></label>
                     </div><br>
                     <div class="avatar-grid">
-                        <input type="radio" name="img_URL" value="../images/avatar/a07" id="avatar7" style="display: none;">
+                        <input type="radio" name="img_URL" value="../images/avatar/a07.jpg" id="avatar7" style="display: none;">
                         <label for="avatar7"><img src="../images/avatar/a07.jpg" alt="Avatar 7" width="150" height="150"></label>
 
-                        <input type="radio" name="img_URL" value="../images/avatar/a08" id="avatar8" style="display: none;">
+                        <input type="radio" name="img_URL" value="../images/avatar/a08.jpg" id="avatar8" style="display: none;">
                         <label for="avatar8"><img src="../images/avatar/a08.jpg" alt="Avatar 8" width="150" height="150"></label>
 
-                        <input type="radio" name="img_URL" value="../images/avatar/a09" id="avatar9" style="display: none;">
+                        <input type="radio" name="img_URL" value="../images/avatar/a09.jpg" id="avatar9" style="display: none;">
                         <label for="avatar9"><img src="../images/avatar/a09.jpg" alt="Avatar 9" width="150" height="150"></label>
                     </div>
                 </div>
@@ -130,7 +130,8 @@
                 <!-- แทรกฟอร์มเมื่อเลือก "อัพโหลดรูปภาพ" -->
                 <div class="mb-3">
                     <label for="image_URL" class="form-label">อัพโหลดรูปภาพ</label>
-                    <input type="file" class="form-control" name="img_upload" id="img_upload">
+                    <input type="file" class="form-control" name="img_upload" id="img_upload" accept="image/gif, image/jpeg, image/png">
+                    <p class="small mb-0 mt-2 "><b>Note:</b> Only JPG, JPEG, GIF, PNG file are allowed to upload  </p>
                 </div>
             </div>
 
