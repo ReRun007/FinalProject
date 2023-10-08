@@ -1,0 +1,7 @@
+
+
+/* เมื่อ radio input ถูกเลือกให้เปลี่ยนสีพื้นหลังและเพิ่มเงา */
+.avatar-grid input[type="radio"]:checked + label {
+    background-color: #ff0000; /* เปลี่ยนสีเป็นสีแดงเมื่อถูกเลือก */
+    box-shadow: 0 0 5px 2px #ff0000; /* เพิ่มเงาสีแดง */
+}

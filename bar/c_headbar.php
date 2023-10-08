@@ -43,16 +43,14 @@
           
                   <div class="dropdown text-end">
                     <a href="#" class="d-block link-light link-offset-2 text-decoration-none dropdown-toggle " data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
-                        <?php echo $row['firstname']; ?> 
-                        
+                        <img src="<?php echo $row['img_URL']; ?>" alt="mdo" width="32" height="32" class="rounded-circle">
+                        <?php echo $row['username']; ?> 
                     </a>
-                    <ul class="dropdown-menu text-small" style="">
-                        <li><a class="dropdown-item" href="#">New project...</a></li>
-                        <li><a class="dropdown-item" href="#">Settings</a></li>
-                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <ul class="dropdown-menu text-small text-center" style="">
+                        <li><img src="<?php echo $row['img_URL']; ?>" alt="mdo" width="96" height="96" class="rounded-circle"></li>
+                        <li><a class="dropdown-item" href="#">Edit Profile</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="" onclick="logout('../config/logout.php')" >Sign out</a></li>
+                        <li><a class="dropdown-item" onclick="logout('../config/logout.php')" >Sign out</a></li>
                     </ul>
                   </div>
                 </div>

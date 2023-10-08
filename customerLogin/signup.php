@@ -9,6 +9,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="../CSS/avatar.css">
     
 </head>
 <body>
@@ -16,7 +17,7 @@
     <div class="container">
         <h3 class="mt-4">สมัครสมาชิก</h3>
         <hr>
-        <form action="signup_db.php" method="post">
+        <form action="test.php" method="post">
 
             <!-- เรียกใช้ seesion -->
             <?php if(isset($_SESSION['error'])){ ?>
@@ -56,6 +57,18 @@
                 <input type="text" class="form-control" name="lastname" aria-describedby="lastname">
             </div>
             <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" name="username" aria-describedby="username">
+            </div>
+            <div class="mb-3">
+                <label for="phone_number" class="form-label">Phone</label>
+                <input type="tel" class="form-control" name="phone_number" aria-describedby="phone_number">
+            </div>
+            <div class="mb-3">
+                <label for="address" class="form-label">Address</label>
+                <textarea class="form-control" name="address" aria-describedby="address" rows="3"></textarea>
+            </div>   
+            <div class="mb-3">
                 <label for="email" class="form-label">E-mail</label>
                 <input type="text" class="form-control" name="email" aria-describedby="email">
             </div>
@@ -67,10 +80,94 @@
                 <label for="confirm password" class="form-label">Confirm Password</label>
                 <input type="password" class="form-control" name="confirmPassword">
             </div>
-            <button type="submit" name="signup"class="btn btn-primary">Signup</button>
+
+            <input type="radio" class="btn-check" name="profile_type" id="profile_select" value="A" checked>
+            <label class="btn btn-outline-success" for="profile_select">เลือก Avatar</label>
+
+            <input type="radio" class="btn-check" name="profile_type" id="profile_upload" value="B" >
+            <label class="btn btn-outline-danger" for="profile_upload">อัพโหลดรูปภาพ</label>  
+
+            <div id="avatar">
+                <!-- เลือก Avatar" -->
+                <div class="mb-3">
+                    <label for="avatar" class="form-label">เลือกรูป Avatar</label>
+                    <div class="avatar-grid" >
+                        <input type="radio" name="img_URL" value="../images/avatar/a01" id="avatar1" style="display: none;">
+                        <label for="avatar1"><img src="../images/avatar/a01.jpg" alt="Avatar 1" width="150" height="150"></label>
+
+                        <input type="radio" name="img_URL" value="../images/avatar/a02" id="avatar2" style="display: none;">
+                        <label for="avatar2"><img src="../images/avatar/a02.jpg" alt="Avatar 2" width="150" height="150"></label>
+
+                        <input type="radio" name="img_URL" value="../images/avatar/a03" id="avatar3" style="display: none;">
+                        <label for="avatar3"><img src="../images/avatar/a03.jpg" alt="Avatar 3" width="150" height="150"></label>
+                    </div><br>
+                    <div class="avatar-grid">
+                        <input type="radio" name="img_URL" value="../images/avatar/a04" id="avatar4" style="display: none;">
+                        <label for="avatar4"><img src="../images/avatar/a04.jpg" alt="Avatar 4" width="150" height="150"></label>
+
+                        <input type="radio" name="img_URL" value="../images/avatar/a05" id="avatar5" style="display: none;">
+                        <label for="avatar5"><img src="../images/avatar/a05.jpg" alt="Avatar 5" width="150" height="150"></label>
+
+                        <input type="radio" name="img_URL" value="../images/avatar/a06" id="avatar6" style="display: none;"> 
+                        <label for="avatar6"><img src="../images/avatar/a06.jpg" alt="Avatar 6" width="150" height="150"></label>
+                    </div><br>
+                    <div class="avatar-grid">
+                        <input type="radio" name="img_URL" value="../images/avatar/a07" id="avatar7" style="display: none;">
+                        <label for="avatar7"><img src="../images/avatar/a07.jpg" alt="Avatar 7" width="150" height="150"></label>
+
+                        <input type="radio" name="img_URL" value="../images/avatar/a08" id="avatar8" style="display: none;">
+                        <label for="avatar8"><img src="../images/avatar/a08.jpg" alt="Avatar 8" width="150" height="150"></label>
+
+                        <input type="radio" name="img_URL" value="../images/avatar/a09" id="avatar9" style="display: none;">
+                        <label for="avatar9"><img src="../images/avatar/a09.jpg" alt="Avatar 9" width="150" height="150"></label>
+                    </div>
+                </div>
+            </div>
+            <!-- เลือก Avatar" -->
+
+
+            <div id="upload" style="display: none;">
+                <!-- แทรกฟอร์มเมื่อเลือก "อัพโหลดรูปภาพ" -->
+                <div class="mb-3">
+                    <label for="image_URL" class="form-label">อัพโหลดรูปภาพ</label>
+                    <input type="file" class="form-control" name="img_upload" id="img_upload">
+                </div>
+            </div>
+
+            <br><br><br>
+            <button type="submit" name="signup"class="btn btn-primary">Sign up</button>
         </form>
         <hr>
         <p>เป็นสมาชิกแล้วใช่ไหม คลิกที่นี่เพื่อ <a href="signin.php">เข้าสู่ระบบ</a></p>
     </div>
 </body>
 </html>
+
+
+<script>
+const successRadio = document.getElementById("profile_select");
+const dangerRadio = document.getElementById("profile_upload");
+const avatar = document.getElementById("avatar");
+const upload = document.getElementById("upload");
+const imgUpload = document.getElementById("img_upload");
+
+successRadio.addEventListener("click", function () {
+    avatar.style.display = "block";
+    upload.style.display = "none";
+    // เคลียร์ค่าใน input อัพโหลดรูปภาพ
+    imgUpload.value = '';
+});
+
+// หากคลิกที่ "อัพโหลดรูปภาพ" ให้แสดงฟอร์มอัพโหลดรูปภาพ และซ่อนฟอร์มเลือก Avatar
+dangerRadio.addEventListener("click", function () {
+    avatar.style.display = "none";
+    upload.style.display = "block";
+    // เคลียร์ค่าใน input รูป Avatar
+    const avatarRadios = document.querySelectorAll('input[name="img_URL"]');
+    for (const radio of avatarRadios) {
+        radio.checked = false;
+    }
+});
+</script>
+
+
