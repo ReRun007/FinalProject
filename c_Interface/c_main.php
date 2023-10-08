@@ -26,7 +26,6 @@
 
     <div class="container">
         <h3 class="mt-4">Hello <?php echo $row['firstname']; ?></h3>
-        <a href="../config/logout.php" class="btn btn-danger">ออกจากระบบ</a>
     </div>
 </body>
 </html>
