@@ -21,24 +21,35 @@
         } elseif ($a == 'B') {
 //----------------------------เอาไปใช้ต่อด้วย----------------------------------------------------------
             // ฟังก์ชั่นเมื่ออัพโหลดไฟล์
-            //echo 'Upload: ' . $img_URL;
+            //$img_URL  = $_POST['img_upload'];
+            //echo 'Upload: ' ;//. $img_URL;
             $targetDir = "../images/customer";
-            if(!empty($_FILES["file"]["name"]))
-            $fileName = basename($_FILES["file"]["name"]);
-            $targetFilePath = $targetDir.$fileName;
-            $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
-            //Allow certain file formats
-            $allowTypes = array('jpg','png','jpeg','gif');
-            if(in_array($fileType, $allowTypes)){
-                if(move_uploaded_file($_FILES['file']['tmp_name'], $targetFilePath)){
-                    $img_URL = $fileName;
-                }else{
-                    $_SESSION['error'] = "Upload File ERROR";
+
+            if (!empty($_FILES["img_upload"]["name"])) {
+                //echo "A";
+                $fileName = basename($_FILES["img_upload"]["name"]);
+                $targetFilePath = $targetDir . $fileName;
+                $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
+
+                // อนุญาตให้อนุญาตไฟล์บางประเภทเท่านั้น
+                $allowTypes = array('jpg', 'png', 'jpeg', 'gif');
+                
+                if (in_array($fileType, $allowTypes)) {
+                    if (move_uploaded_file($_FILES['img_upload']['tmp_name'], $targetFilePath)) {
+                        //echo "a";
+                        $img_URL = $targetFilePath;
+                    } else {
+                        //echo "Aa";
+                        $_SESSION['error'] = "Upload File ERROR";
+                        header("location:signup.php");
+                    }
+                } else {
+                    $_SESSION['error'] = "File Type ไม่ตรงกับที่กำหนด";
                     header("location:signup.php");
+                    //echo $fileName . $fileType;
                 }
-            }else{
-                $_SESSION['error'] = "File Type ไม่ตรงกับที่กำหนด";
-                header("location:signup.php");
+            } else {
+                //echo "B";
             }
 
         } else {
@@ -111,9 +122,11 @@
                     $stmt->execute();
                     $_SESSION['success'] = "สมัครสมาชิกเรียบร้อยแล้ว! <a href='signin.php' class='alert-link'>คลิกที่นี่</a> เพื่อเข้าสู่ระบบ" ;
                     header("location:signup.php");
+                    //echo $img_URL;
                 }else{
                     $_SESSION['error'] = "มีบางอย่างผิดพลาด" ;
                     header("location:signup.php");
+                    //echo $img_URL.$fileName.$fileType;
                 }
             } catch(PDOException $e){
                 echo $e->getMessage();

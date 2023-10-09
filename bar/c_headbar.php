@@ -2,6 +2,10 @@
     require_once '../config/bs5.php';
     require_once '../config/db.php';
     session_start();
+    if(!isset($_SESSION['customer_login'])){
+      $_SESSION['error'] = 'กรุณาเข้าสู่ระบบ';
+      header('location: ../customerLogin/signin.php');
+  }
 ?>
 
 <!DOCTYPE html>

@@ -17,7 +17,7 @@
     <div class="container">
         <h3 class="mt-4">สมัครสมาชิก</h3>
         <hr>
-        <form action="signup_db.php" method="post">
+        <form action="signup_db.php" method="post" enctype="multipart/form-data">
 
             <!-- เรียกใช้ seesion -->
             <?php if(isset($_SESSION['error'])){ ?>
