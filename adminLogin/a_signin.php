@@ -12,16 +12,14 @@
     <link rel="stylesheet" href="../CSS/login.css">
 </head>
 <body>
-<a href="../adminLogin/a_signin.php" class="admin">เข้าสู่ระบบสำหรับพนักงาน</a>
+<a href="../customerLogin./signin.php" class="admin">เข้าสู่ระบบสำหรับสมาชิก</a>
 <div class="bg"></div>
-<div class="container">
-<div class="text-center"><img src="../images/LogoEatKubTang.jpg" alt="Logo" height="130" style="border-radius: 5%;" ></div><br>
-<main class="form-signin"> 
 
-        <h3 class="mt-3 text-center">Login</h3>
-        
+<main class="form-signin">
+<div class="container">
+        <h3 class="mt-4">Login For Admin</h3>
         <hr>
-        <form action="signin_db.php" method="post">
+        <form action="a_signin_db.php" method="post">
                 <!-- เรียกใช้ seesion -->
             <?php if(isset($_SESSION['error'])){ ?>
                     <div class="alert alert-danger" role='alert'>
@@ -51,10 +49,9 @@
                 <input type="password" class="form-control" name="password" placeholder="Password">
                 <label for="password" class="form-label">Password</label>
             </div><br>
-            <button type="submit" name="signin" class="w-100 btn btn-info" >Signin</button>
+            <button type="submit" name="signin" class="w-100 btn btn-info" >Signin For Admin</button>
         </form>
         <hr>
-        <p>ยังไม่เป็นสมาชิกใช่ไหม คลิกที่นี่เพื่อ <a href="signup.php">สมัครสมาชิก</a></p>
         <p class="copyright">&copy; 2023 Inc.</p>
     </div>
 </main>

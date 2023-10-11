@@ -2,9 +2,9 @@
     require_once '../config/bs5.php';
     require_once '../config/db.php';
     session_start();
-    if(!isset($_SESSION['customer_login'])){
+    if(!isset($_SESSION['employee_login'])){
       $_SESSION['error'] = 'กรุณาเข้าสู่ระบบ';
-      header('location: ../customerLogin/signin.php');
+      header('location: ../adminLogin/a_signin.php');
   }
 ?>
 
@@ -17,9 +17,9 @@
 <body>
 
     <?php    
-        if(isset($_SESSION['customer_login'])){
-        $customer_id = $_SESSION['customer_login'];
-        $stmt = $conn->query("SELECT * FROM customers WHERE customer_id = $customer_id" );
+        if(isset($_SESSION['employee_login'])){
+        $employee_id = $_SESSION['employee_login'];
+        $stmt = $conn->query("SELECT * FROM employees WHERE employee_id = $employee_id" );
         $stmt->execute();
         $row = $stmt->fetch(PDO::FETCH_ASSOC); 
         }
@@ -50,7 +50,7 @@
                         <img src="<?php echo $row['img_URL']; ?>" alt="mdo" width="32" height="32" class="rounded-circle">
                         <?php echo $row['username']; ?> 
                     </a>
-                    <ul class="dropdown-menu text-small text-center" style="">
+                    <ul class="dropdown-menu text-small text-center" >
                         <li><img src="<?php echo $row['img_URL']; ?>" alt="mdo" width="96" height="96" class="rounded-circle"></li>
                         <li><?php echo $row['username']; ?> </li>
                         <li><a class="dropdown-item" href="#">Edit Profile</a></li>

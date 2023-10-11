@@ -9,13 +9,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="../CSS/signup.css">
     <link rel="stylesheet" href="../CSS/avatar.css">
+    
+
     
 </head>
 <body>
 
-    <div class="container">
-        <h3 class="mt-4">สมัครสมาชิก</h3>
+<div class="bg"></div>
+
+    <div class="form-signin">
+        <h3 class="mt-4">Register</h3>
         <hr>
         <form action="signup_db.php" method="post" enctype="multipart/form-data">
 
@@ -48,39 +53,39 @@
             <?php } ?>
 
 
-            <div class="mb-3">
+            <div class="form-floating">
+                <input type="text" class="form-control" name="firstname" aria-describedby="firstname" placeholder="firstname">
                 <label for="firstname" class="form-label">First Name</label>
-                <input type="text" class="form-control" name="firstname" aria-describedby="firstname">
             </div>
-            <div class="mb-3">
+            <div class="form-floating">
+                <input type="text" class="form-control" name="lastname" aria-describedby="lastname"  placeholder="lastname">
                 <label for="lastname" class="form-label">Last Name</label>
-                <input type="text" class="form-control" name="lastname" aria-describedby="lastname">
             </div>
-            <div class="mb-3">
+            <div class="form-floating">
+                <input type="text" class="form-control" name="username" aria-describedby="username"  placeholder="username">
                 <label for="username" class="form-label">Username</label>
-                <input type="text" class="form-control" name="username" aria-describedby="username">
             </div>
-            <div class="mb-3">
+            <div class="form-floating">
+                <input type="tel" class="form-control" name="phone_number" aria-describedby="phone_number"  placeholder="phone_number">
                 <label for="phone_number" class="form-label">Phone</label>
-                <input type="tel" class="form-control" name="phone_number" aria-describedby="phone_number">
             </div>
-            <div class="mb-3">
+            <div class="form-floating">
+                <textarea class="form-control" name="address" aria-describedby="address" placeholder="address"></textarea>
                 <label for="address" class="form-label">Address</label>
-                <textarea class="form-control" name="address" aria-describedby="address" rows="3"></textarea>
             </div>   
-            <div class="mb-3">
+            <div class="form-floating">
+                <input type="text" class="form-control" name="email" aria-describedby="email" placeholder="email">
                 <label for="email" class="form-label">E-mail</label>
-                <input type="text" class="form-control" name="email" aria-describedby="email">
             </div>
-            <div class="mb-3">
+            <div class="form-floating">
+                <input type="password" class="form-control" name="password" placeholder="password">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" name="password">
             </div>
-            <div class="mb-3">
+            <div class="form-floating">
+                <input type="password" class="form-control" name="confirmPassword" placeholder="password">
                 <label for="confirm password" class="form-label">Confirm Password</label>
-                <input type="password" class="form-control" name="confirmPassword">
             </div>
-
+            <br>
             <input type="radio" class="btn-check" name="profile_type" id="profile_select" value="A" checked>
             <label class="btn btn-outline-success" for="profile_select">เลือก Avatar</label>
 
@@ -88,9 +93,9 @@
             <label class="btn btn-outline-danger" for="profile_upload">อัพโหลดรูปภาพ</label>  
 
             <div id="avatar">
-                <!-- เลือก Avatar" -->
-                <div class="mb-3">
-                    <label for="avatar" class="form-label">เลือกรูป Avatar</label>
+                <!-- เลือก Avatar" --> 
+                <div class="mb-3" >
+                    <br>
                     <div class="avatar-grid" >
                         <input type="radio" name="img_URL" value="../images/avatar/a01.jpg" id="avatar1" style="display: none;">
                         <label for="avatar1"><img src="../images/avatar/a01.jpg" alt="Avatar 1" width="150" height="150"></label>
@@ -129,18 +134,20 @@
             <div id="upload" style="display: none;">
                 <!-- แทรกฟอร์มเมื่อเลือก "อัพโหลดรูปภาพ" -->
                 <div class="mb-3">
-                    <label for="image_URL" class="form-label">อัพโหลดรูปภาพ</label>
+                    <br>
                     <input type="file" class="form-control" name="img_upload" id="img_upload" accept="image/gif, image/jpeg, image/png">
                     <p class="small mb-0 mt-2 "><b>Note:</b> Only JPG, JPEG, GIF, PNG file are allowed to upload  </p>
                 </div>
             </div>
 
-            <br><br><br>
+            <br>
             <button type="submit" name="signup"class="btn btn-primary">Sign up</button>
         </form>
         <hr>
         <p>เป็นสมาชิกแล้วใช่ไหม คลิกที่นี่เพื่อ <a href="signin.php">เข้าสู่ระบบ</a></p>
+        <p class="copyright">&copy; 2023 Inc.</p>
     </div>
+    
 </body>
 </html>
 
