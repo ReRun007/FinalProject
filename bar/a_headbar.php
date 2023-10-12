@@ -1,5 +1,5 @@
 <?php
-    require_once '../config/bs5.php';
+    require_once '../config/bs5.php'; 
     require_once '../config/db.php';
     session_start();
     if(!isset($_SESSION['employee_login'])){
@@ -25,27 +25,10 @@
         }
     ?>
 
-    <header class="sticky-top p-3 text-bg-dark">
+    <header>
         <!-- โค้ดของ <header> จากไฟล์เดิม -->
             <div class="container">
-                <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                  <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-                      <img src="../images/LogoEatKubTang.jpg" alt="Logo" height="45" style="border-radius: 5%;">
-                  </a>
-          
-                  <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="" class="nav-link px-2 text-secondary">Home</a></li>
-                    <li><a href="" class="nav-link px-2 text-white">Features</a></li>
-                    <li><a href="" class="nav-link px-2 text-white">Pricing</a></li>
-                    <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
-                    <li><a href="#" class="nav-link px-2 text-white">About</a></li>
-                  </ul>
-          
-                  <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-                    <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search">
-                  </form>
-          
-                  <div class="dropdown text-end">
+                  <div class="dropdown">
                     <a href="#" class="d-block link-light link-offset-2 text-decoration-none dropdown-toggle " data-bs-toggle="dropdown" aria-expanded="false">
                         <img src="<?php echo $row['img_URL']; ?>" alt="mdo" width="32" height="32" class="rounded-circle">
                         <?php echo $row['username']; ?> 
@@ -58,8 +41,12 @@
                         <li><button type="button" class="btn btn-outline-danger" onclick="logout('../config/logout.php')">Logout</button></li>
                     </ul>
                   </div>
+                  <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start mt-3 mb-3">
+                    <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                        <img src="../images/LogoEatKubTang.jpg" alt="Logo" height="70" style="border-radius: 5%;">
+                    </a>
                 </div>
-              </div>
+            </div>
     </header>
 </body>
 </html>
