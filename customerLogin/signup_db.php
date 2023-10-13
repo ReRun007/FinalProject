@@ -38,7 +38,7 @@
                 if (in_array($fileType, $allowTypes)) {
                     if (move_uploaded_file($_FILES['img_upload']['tmp_name'], $targetFilePath)) {
                         //echo "a";
-                        $img_URL = $targetFilePath;
+                        $img_URL = "../".$targetFilePath;
                     } else {
                         //echo "Aa";
                         $_SESSION['error'] = "Upload File ERROR";

@@ -1,7 +1,7 @@
 <?php 
-    require_once '../config/db.php';
-    require_once '../config/bs5.php';
-    require_once '../bar/c_headbar.php';
+    require_once '../../config/db.php';
+    require_once '../../config/bs5.php';
+    require_once 'c_headbar.php';
 ?>
 
 

@@ -97,33 +97,33 @@
                 <div class="mb-3" >
                     <br>
                     <div class="avatar-grid" >
-                        <input type="radio" name="img_URL" value="../images/avatar/a01.jpg" id="avatar1" style="display: none;">
+                        <input type="radio" name="img_URL" value="../../images/avatar/a01.jpg" id="avatar1" style="display: none;">
                         <label for="avatar1"><img src="../images/avatar/a01.jpg" alt="Avatar 1" width="150" height="150"></label>
 
-                        <input type="radio" name="img_URL" value="../images/avatar/a02.jpg" id="avatar2" style="display: none;">
+                        <input type="radio" name="img_URL" value="../../images/avatar/a02.jpg" id="avatar2" style="display: none;">
                         <label for="avatar2"><img src="../images/avatar/a02.jpg" alt="Avatar 2" width="150" height="150"></label>
 
-                        <input type="radio" name="img_URL" value="../images/avatar/a03.jpg" id="avatar3" style="display: none;">
+                        <input type="radio" name="img_URL" value="../../images/avatar/a03.jpg" id="avatar3" style="display: none;">
                         <label for="avatar3"><img src="../images/avatar/a03.jpg" alt="Avatar 3" width="150" height="150"></label>
                     </div><br>
                     <div class="avatar-grid">
-                        <input type="radio" name="img_URL" value="../images/avatar/a04.jpg" id="avatar4" style="display: none;">
+                        <input type="radio" name="img_URL" value="../../images/avatar/a04.jpg" id="avatar4" style="display: none;">
                         <label for="avatar4"><img src="../images/avatar/a04.jpg" alt="Avatar 4" width="150" height="150"></label>
 
-                        <input type="radio" name="img_URL" value="../images/avatar/a05.jpg" id="avatar5" style="display: none;">
+                        <input type="radio" name="img_URL" value="../../images/avatar/a05.jpg" id="avatar5" style="display: none;">
                         <label for="avatar5"><img src="../images/avatar/a05.jpg" alt="Avatar 5" width="150" height="150"></label>
 
-                        <input type="radio" name="img_URL" value="../images/avatar/a06.jpg" id="avatar6" style="display: none;"> 
+                        <input type="radio" name="img_URL" value="../../images/avatar/a06.jpg" id="avatar6" style="display: none;"> 
                         <label for="avatar6"><img src="../images/avatar/a06.jpg" alt="Avatar 6" width="150" height="150"></label>
                     </div><br>
                     <div class="avatar-grid">
-                        <input type="radio" name="img_URL" value="../images/avatar/a07.jpg" id="avatar7" style="display: none;">
+                        <input type="radio" name="img_URL" value="../../images/avatar/a07.jpg" id="avatar7" style="display: none;">
                         <label for="avatar7"><img src="../images/avatar/a07.jpg" alt="Avatar 7" width="150" height="150"></label>
 
-                        <input type="radio" name="img_URL" value="../images/avatar/a08.jpg" id="avatar8" style="display: none;">
+                        <input type="radio" name="img_URL" value="../../images/avatar/a08.jpg" id="avatar8" style="display: none;">
                         <label for="avatar8"><img src="../images/avatar/a08.jpg" alt="Avatar 8" width="150" height="150"></label>
 
-                        <input type="radio" name="img_URL" value="../images/avatar/a09.jpg" id="avatar9" style="display: none;">
+                        <input type="radio" name="img_URL" value="../../images/avatar/a09.jpg" id="avatar9" style="display: none;">
                         <label for="avatar9"><img src="../images/avatar/a09.jpg" alt="Avatar 9" width="150" height="150"></label>
                     </div>
                 </div>

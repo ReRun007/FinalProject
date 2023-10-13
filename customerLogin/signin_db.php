@@ -30,7 +30,7 @@
                     if($email == $row['email']){
                         if(password_verify($password,$row['password'])){
                             $_SESSION['customer_login'] = $row['customer_id'];
-                            header("location:../c_Interface/c_main.php"); 
+                            header("location:../c_Interface/main/c_main.php"); 
                         }else{
                             $_SESSION['error'] = "รหัสผิด" ;
                             header("location:signin.php");
