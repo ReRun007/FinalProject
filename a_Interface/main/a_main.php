@@ -19,10 +19,10 @@
 <body>
     <div class="bg"></div>
     <div class="body-m">
-    <h1>Admin Panel</h1>
+    <h1 class="mt-5">Admin Panel</h1>
     <header>
         <!-- โค้ดของ <header> จากไฟล์เดิม -->
-            <div class="container">
+            <div class="container mt-2">
                   <div class="dropdown">
                     <a href="#" class="d-block link-light link-offset-2 text-decoration-none dropdown-toggle " data-bs-toggle="dropdown" aria-expanded="false">
                         <img src="<?php echo $row['img_URL']; ?>" alt="mdo" width="32" height="32" class="rounded-circle">

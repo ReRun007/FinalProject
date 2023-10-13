@@ -6,9 +6,7 @@
     height: 100vh;
 }
 
-header, nav, main, footer {
-    text-align: center;
-}
+
 
 nav ul {
     list-style: none;

@@ -11,9 +11,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="../CSS/signup.css">
     <link rel="stylesheet" href="../CSS/avatar.css">
-    
 
-    
 </head>
 <body>
 
