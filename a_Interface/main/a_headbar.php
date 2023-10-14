@@ -50,15 +50,15 @@
             </a>
           </li>
           <li>
-            <a href="#" class="nav-link text-white ">
+            <a href="../product/view_product.php" class="nav-link text-white <?php echo $currentPage === 'product' ? 'active' : ''; ?> ">
               <svg class="bi me-2" width="16" height="16"></svg>
-              Orders
+              Products
             </a>
           </li>
           <li>
-            <a href="#" class="nav-link text-white">
+            <a href="#" class="nav-link text-white ">
               <svg class="bi me-2" width="16" height="16"></svg>
-              Products
+              Orders
             </a>
           </li>
           <li>
