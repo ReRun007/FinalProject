@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['quantity'], $_POST['p
     if (isset($_SESSION['customer_login'])) {
         // ตรวจสอบว่าจำนวนสินค้ามีค่าที่ถูกต้องหรือไม่
         if (count($quantities) !== count($productIds)) {
-            $_SESSION['message'] = 'มีข้อผิดพลาดในการอัปเดตตะกร้า';
+            $_SESSION['error'] = 'มีข้อผิดพลาดในการอัปเดตตะกร้า';
             header('Location: view_cart.php'); // แสดงหน้าตะกร้าอีกครั้ง
             exit;
         }
@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['quantity'], $_POST['p
             $quantity = (int)$quantities[$index];
 
             if ($quantity < 1) {
-                $_SESSION['message'] = 'จำนวนสินค้าไม่ถูกต้อง';
+                $_SESSION['error'] = 'จำนวนสินค้าไม่ถูกต้อง';
                 header('Location: view_cart.php'); // แสดงหน้าตะกร้าอีกครั้ง
                 exit;
             }
@@ -37,16 +37,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['quantity'], $_POST['p
             $stmt->execute();
         }
 
-        $_SESSION['message'] = 'อัปเดตตะกร้าสำเร็จ';
+        $_SESSION['success'] = 'อัปเดตตะกร้าสำเร็จ';
         header('Location: view_cart.php'); // แสดงหน้าตะกร้าอีกครั้งหลังจากอัปเดตเรียบร้อย
         exit;
     } else {
-        $_SESSION['message'] = 'กรุณาเข้าสู่ระบบ';
+        $_SESSION['error'] = 'กรุณาเข้าสู่ระบบ';
         header('Location: view_cart.php'); // แสดงหน้าตะกร้าอีกครั้ง
         exit;
     }
 } else {
-    $_SESSION['message'] = 'ข้อผิดพลาด';
+    $_SESSION['error'] = 'ข้อผิดพลาด';
     header('Location: view_cart.php'); // แสดงหน้าตะกร้าอีกครั้ง
     exit;
 }

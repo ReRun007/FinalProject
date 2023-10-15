@@ -4,7 +4,7 @@ require_once '../../config/bs5.php';
 require_once '../main/c_headbar.php';
 
 // ดึงข้อมูลจากตาราง cart
-$sql = "SELECT c.*, p.product_name, p.price,p.img_url FROM cart c
+$sql = "SELECT c.*, p.product_name, p.price, p.img_url FROM cart c
         JOIN products p ON c.product_id = p.product_id
         WHERE c.customer_id = :customer_id";
 $stmt = $conn->prepare($sql);
@@ -17,6 +17,8 @@ $totalPrice = 0;
 foreach ($cartItems as $item) {
     $totalPrice += $item['price'] * $item['quantity'];
 }
+$discount = 0;
+$realPrice = 0;
 ?>
 
 <!DOCTYPE html>
@@ -29,31 +31,28 @@ foreach ($cartItems as $item) {
 </head>
 <body>
     <script src="../../JS/quantity.js"></script>
-    <div class="container-table mt-5 bg-white rounded"><br>
-            <h2 class="ms-3 mb-3">ตะกร้าสินค้า</h2>
+    <div class="container-table mt-5 bg-white rounded">
+        <br><h2 class="ms-3 mb-3">ตะกร้าสินค้า</h2>
+
         <?php 
-            if(isset($_SESSION['message'])){ 
-                echo "<div class='alert alert-success' role='alert'>".$_SESSION['message']." </div>";
-                unset($_SESSION['message']);
-            }else if(isset($_SESSION['error'])){
-                echo "<div class='alert alert-danger' role='alert'>".$_SESSION['error']." </div>";
-                unset($_SESSION['error']);
-            }else if(isset($_SESSION['success'])){
-                echo "<div class='alert alert-success' role='alert'>".$_SESSION['success']." </div>";
-                unset($_SESSION['success']);
-            }
+        if(isset($_SESSION['success'])){ 
+            echo "<div class='alert alert-success' role='alert'>" . $_SESSION['success'] . " </div>";
+            unset($_SESSION['success']);
+        } elseif(isset($_SESSION['error'])){
+            echo "<div class='alert alert-danger' role='alert'>" . $_SESSION['error'] . " </div>";
+            unset($_SESSION['error']);
+        }
         ?>
 
-
         <form action="update_cart.php" method="post">
-            <table class=" table text-center table-hover align-middle mt-3 me-3 table-light">
+            <table class="table text-center table-hover align-middle mt-3 me-3 table-light">
                 <thead class="table-dark">
                     <tr>
                         <th>รูป</th>
                         <th>ชื่อสินค้า</th>
                         <th>ราคา</th>
                         <th>จำนวน</th>
-                        <th>Delate</th>
+                        <th>Delete</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -67,7 +66,7 @@ foreach ($cartItems as $item) {
                                 <input type="number" name="quantity[]" class="form-control text-center" value="<?php echo $item['quantity']; ?>" min="0" style="width: 100px;">
                             </td>
                             <td>
-                            <a class="btn btn-danger" href="delete.php?id=<?php echo $item['id'] ?>" onclick="return confirm('แน่ใจหรือไม่ว่าต้องการลบข้อมูลนี้?')">Delate</a>
+                                <a class="btn btn-danger" href="delete.php?id=<?php echo $item['id'] ?>" onclick="return confirm('แน่ใจหรือไม่ว่าต้องการลบข้อมูลนี้?">Delete</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -75,8 +74,40 @@ foreach ($cartItems as $item) {
             </table>
             <button type="submit" class="btn btn-primary">อัปเดตตะกร้า</button>
         </form>
+
+        <div class="container mt-3">
+            <h2>Coupon Code</h2>
+            <form action="check_coupon.php" method="post">
+                <div class="row">
+                    <div class="col-6">
+                        <input type="text" class="form-control" name="coupon_code" maxlength="5" placeholder="Enter coupon code">
+                    </div>
+                    <div class="col-6">
+                        <input type="hidden" name="totalPrice" value="<?php echo $totalPrice; ?>">
+                        <button type="submit" class="btn btn-primary">Use Coupon</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Confirm Order button -->
+        <div class="container mt-3">
+            <form action="confirm_order.php" method="post">
+                <button type="submit" class="btn btn-success">Confirm Order</button>
+            </form>
+        </div>
+
+        <?php 
+            if(isset($_SESSION['discount'])){
+                $discount = $_SESSION['discount'];
+                $realPrice = $totalPrice - $discount;
+            }
+        ?>
+
         <div class="mt-3 mb-3 fw-bold">
             <p>ราคารวม: <span id="totalPrice"><?php echo $totalPrice; ?></span> บาท</p>
+            <p>ส่วนลดจากคูปอง: <span id="discount"><?php echo $discount; ?></span> บาท</p>
+            <p>ราคาหลังลด: <span id="realPrice"><?php echo $realPrice; ?></span> บาท</p>
         </div><br>
     </div>
 </body>
