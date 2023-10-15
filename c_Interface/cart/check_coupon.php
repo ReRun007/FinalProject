@@ -19,6 +19,7 @@ if (isset($_POST['coupon_code'])) {
                 $discount =  $couponData['discount_amount'];
             }
             $_SESSION['discount'] = $discount;
+            $_SESSION['discount_code'] = $couponCode;
             $_SESSION['success'] = 'You Have discount '.$discount.' Bath';
         }else{
             $_SESSION['error'] = 'ยังไม่ถึงยอดขั้นต่ำ';

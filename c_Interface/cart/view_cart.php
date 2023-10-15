@@ -18,7 +18,7 @@ foreach ($cartItems as $item) {
     $totalPrice += $item['price'] * $item['quantity'];
 }
 $discount = 0;
-$realPrice = 0;
+$realPrice = $totalPrice;
 ?>
 
 <!DOCTYPE html>
@@ -90,25 +90,25 @@ $realPrice = 0;
             </form>
         </div>
 
-        <!-- Confirm Order button -->
-        <div class="container mt-3">
-            <form action="confirm_order.php" method="post">
-                <button type="submit" class="btn btn-success">Confirm Order</button>
-            </form>
-        </div>
-
         <?php 
             if(isset($_SESSION['discount'])){
                 $discount = $_SESSION['discount'];
                 $realPrice = $totalPrice - $discount;
             }
         ?>
-
-        <div class="mt-3 mb-3 fw-bold">
+        
+        <div class="mt-3 mb-3 ms-5 fw-bold">
             <p>ราคารวม: <span id="totalPrice"><?php echo $totalPrice; ?></span> บาท</p>
             <p>ส่วนลดจากคูปอง: <span id="discount"><?php echo $discount; ?></span> บาท</p>
             <p>ราคาหลังลด: <span id="realPrice"><?php echo $realPrice; ?></span> บาท</p>
-        </div><br>
+        </div>
+        <!-- Confirm Order button -->
+        <div class="container mt-3">
+            <form action="confirm_order.php" method="post">
+                <input type="hidden" name="orderPrice" value="<?php echo $realPrice ?>">
+                <button type="submit" class="btn btn-success">Confirm Order</button>
+            </form>
+        </div>
     </div>
 </body>
 </html>
