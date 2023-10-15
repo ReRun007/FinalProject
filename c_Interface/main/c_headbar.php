@@ -1,11 +1,12 @@
 <?php
-    require_once '../../config/db.php';
-    require_once '../../config/bs5.php';
-    session_start();
-    if(!isset($_SESSION['customer_login'])){
-      $_SESSION['error'] = 'กรุณาเข้าสู่ระบบ';
-      header('location: ../../customerLogin/signin.php');
-  }
+require_once '../../config/db.php';
+require_once '../../config/bs5.php';
+require_once 'cart.php'; // เรียกใช้ไฟล์ cart.php
+session_start();
+if (!isset($_SESSION['customer_login'])) {
+    $_SESSION['error'] = 'กรุณาเข้าสู่ระบบ';
+    header('location: ../../customerLogin/signin.php');
+}
 ?>
 
 <!DOCTYPE html>
@@ -13,16 +14,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../CSS/bg.css">
+    
 </head>
 <body>
+<div class="bg"></div>
 
-    <?php    
-        if(isset($_SESSION['customer_login'])){
+    <?php
+    if (isset($_SESSION['customer_login'])) {
         $customer_id = $_SESSION['customer_login'];
-        $stmt = $conn->query("SELECT * FROM customers WHERE customer_id = $customer_id" );
+        $_SESSION['cart'] = loadCartForUser($customer_id); // ใช้ฟังก์ชัน loadCartForUser()
+        $stmt = $conn->query("SELECT * FROM customers WHERE customer_id = $customer_id");
         $stmt->execute();
-        $row = $stmt->fetch(PDO::FETCH_ASSOC); 
-        }
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    }
     ?>
 
     <header class="sticky-top p-3 text-bg-dark">
@@ -34,16 +39,30 @@
                   </a>
           
                   <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="" class="nav-link px-2 text-secondary">Home</a></li>
+                    <li><a href="../main/c_main.php" class="nav-link px-2 text-secondary">Home</a></li>
                     <li><a href="../product/view_product.php" class="nav-link px-2 text-white">Product</a></li>
-                    <li><a href="" class="nav-link px-2 text-white">Pricing</a></li>
-                    <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
-                    <li><a href="#" class="nav-link px-2 text-white">About</a></li>
                   </ul>
           
                   <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
                     <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search">
                   </form>
+                  <a href="../cart/view_cart.php" class="btn btn-primary position-relative me-3">
+                    ตะกร้าสินค้า
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                      <?php
+                        if (isset($_SESSION['cart']) && is_array($_SESSION['cart'])) {
+                            $cartQuantity = 0;
+                            foreach ($_SESSION['cart'] as $cartItem) {
+                                $cartQuantity += $cartItem['quantity'];
+                            }
+                            echo $cartQuantity;
+                        } else {
+                            echo '0';
+                        }
+                      ?>
+                      <span class="visually-hidden">unread messages</span>
+                    </span>
+                  </a>
           
                   <div class="dropdown text-end">
                     <a href="#" class="d-block link-light link-offset-2 text-decoration-none dropdown-toggle " data-bs-toggle="dropdown" aria-expanded="false">
@@ -64,9 +83,6 @@
 </body>
 </html>
 
-
-
-
 <script>
   function logout(a) {
     // ใช้ window.confirm() เพื่อแสดงข้อความแจ้งเตือนและปุ่ม 'ยืนยัน' และ 'ยกเลิก'
@@ -76,5 +92,6 @@
     } else {
     }
   }
+  
 </script>
 

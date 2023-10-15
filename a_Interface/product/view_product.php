@@ -9,7 +9,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Category List</title>
+    <title>Product List</title>
     <link rel="stylesheet" href="../../CSS/bg.css">
     <link rel="stylesheet" href="../../CSS/table.css">
 
@@ -19,23 +19,24 @@
     <div class="container-table">
         <h1>Product List</h1>
 
-        <button class="btn btn-secondary mb-4 mt-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">Add Category</button>
+        <button class="btn btn-secondary mb-4 mt-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">Add Product</button>
 
-        <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel" style="height: 400px;">
+        <div class="offcanvas offcanvas-top bg-primary-subtle" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel" style="height: 400px;">
             <div class="offcanvas-body small">
                 
-                <div class="container mt-1 bg-light rounded-5" style="height:400px;">
+                <div class="container mt-1 bg-light rounded-5" style="height:300px;">
                     <form action="add_process.php" method="post" enctype="multipart/form-data"  >
                         <br>
                         <h4>Add Product</h4>
-                        <div class="mb-3 mt-3">
-                            <label for="product_name">Product Name</label>
-                            <input type="text" class="form-control" name="product_name">
-                        </div>
-                        <div class="container mb-3 mt-3 bg-danger" >
+
+                        <div class="container mb-3 mt-3" >
                             <div class="row">
                                 <div class="col">
-                                    <label for="description" class="form-label">Category</label>
+                                    <label for="product_name" class="form-label">Product Name</label>
+                                    <input type="text" class="form-control" name="product_name">
+                                </div>
+                                <div class="col">
+                                    <label for="category" class="form-label">Category</label>
                                     <select name="category" class="form-select mb-3" aria-label="Large select example">
                                         <?php
                                             $sql = "SELECT category_id, category_name FROM category";
@@ -49,12 +50,17 @@
                                 <div class="col">
                                     <label for="price" class="form-label">Product Price</label>
                                     <input type="number" class="form-control" name="price">
+                                    
                                 </div>
                                 <div class="col">
                                     <label for="quantity" class="form-label"> Quantity </label>
                                     <input type="number" class="form-control" name="quantity">
                                 </div>    
                             </div>
+                        </div>
+                        <div class="container mt-3 mb-3">
+                            <input type="file" class="form-control" name="product_img" id="product_img" accept="image/gif, image/jpeg, image/png">
+                            <p class="small mb-0 mt-2 "><b>Note:</b> Only JPG, JPEG, GIF, PNG file are allowed to upload  </p>
                         </div>
 
                         <button type="submit" class="btn btn-outline-primary" name="add">Submit</button>
@@ -100,7 +106,7 @@
             </thead>
             <tbody>
                 <?php 
-                $sql = "SELECT * FROM products,category WHERE products.category_id = category.category_id;";
+                $sql = "SELECT product_id,product_name,category_name,price,quantity,img_url FROM products,category WHERE products.category_id = category.category_id;";
                 $result = $conn->query($sql);
                 if ($result->rowCount() > 0) {
                     $i=1;
@@ -109,13 +115,21 @@
                         echo '<td class="text-center">' . $i . '</td>';
                         echo '<td>' . $row['product_name'] . '</td>';
                         echo '<td>' . $row['category_name'] . '</td>';
-                        echo '<td>' . $row['price'] . '</td>';
-                        echo '<td>' . $row['quantity'] . '</td>';
-                        echo '<td>' . $row['img_url'] . '</td>';
+                        echo '<td class="text-center">' . $row['price'] . '</td>';
+                        echo '<td class="text-center">' . $row['quantity'] . '</td>';
+                        echo '<td class="text-center">';
+                        
+                        if (!empty($row['img_url'])) {
+                            echo '<img src="' . $row['img_url'] . '" alt="Product Image" style="max-width: 100px; max-height: 100px;">';
+                        } else {
+                            echo 'ไม่มีรูปภาพ';
+                        }
+                    
+                        echo '</td>';
                         echo '<td class="text-center">';
                         echo "<a class='btn btn-warning' href='edit.php?product_id=" . $row["product_id"] . "'>Edit";
                         echo '<td class="text-center">';
-                        echo "<a class='btn btn-danger' href='delete.php?product_id=" . $row["product_id"] . "' onclick='return confirm(\"แน่ใจหรือไม่ว่าต้องการลบข้อมูลนี้?\")'>Delate ";
+                        echo "<a class='btn btn-danger' href='delete.php?product_id=" . $row["product_id"] . "' onclick='return confirm(\"แน่ใจหรือไม่ว่าต้องการลบข้อมูลนี้?\")'>Delete ";
                         echo "</td>";
                         echo '</tr>';
                         $i++;

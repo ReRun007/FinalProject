@@ -1,31 +1,27 @@
-<?php 
-    $currentPage = 'product';
-    require_once '../main/a_headbar.php';
-    require_once '../../config/db.php';
+<?php
+$currentPage = 'discount';
+require_once '../main/a_headbar.php';
+require_once '../../config/db.php';
 
 
-        $product_id = $_GET['product_id'];
-        if (!is_numeric($product_id)) {
-            $_SESSION['error'] = "ค่า product_id ไม่ถูกต้อง";
-            header('Location: view_product.php');
-            exit();
-        }
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['coupon_id'])) {
+    $couponId = $_GET['coupon_id'];
 
-        $sql = "SELECT * FROM products,category WHERE product_id = :product_id and products.category_id = category.category_id";
-        $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':product_id', $product_id);
+    $selectQuery = "SELECT * FROM coupon WHERE coupon_id = :coupon_id";
+    $stmt = $conn->prepare($selectQuery);
+    $stmt->bindParam(':coupon_id', $couponId, PDO::PARAM_INT);
+    $stmt->execute();
 
-        if ($stmt->execute()) {
-            $result = $stmt->fetch(PDO::FETCH_ASSOC);
-
-            if ($result) {
-                $product_name = $result['product_name'];
-                $category_id = $result['category_id'];
-                $price = $result['price'];
-                $quantity = $result['quantity'];
-                $img = $result['img_url'];
-            }
-        }
+    if ($stmt->rowCount() > 0) {
+        $coupon = $stmt->fetch(PDO::FETCH_ASSOC);
+    } else {
+        $_SESSION['error'] = 'Coupon not found.';
+        header('Location: view_discount.php');
+    }
+} else {
+    $_SESSION['error'] = 'Invalid request.';
+    header('Location: view_discount.php');
+}
 ?>
 
 <!DOCTYPE html>
@@ -33,8 +29,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit product</title>
+    <title>Edit Coupon</title>
     <link rel="stylesheet" href="../../CSS/bg.css">
+    <link rel="stylesheet" href="../../CSS/table.css">
 </head>
 <body>
     <div class="container mt-5">
@@ -78,5 +75,3 @@
 </body>
 
 </html>
-
-

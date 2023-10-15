@@ -56,6 +56,12 @@
             </a>
           </li>
           <li>
+            <a href="../discount/view_discount.php" class="nav-link text-white <?php echo $currentPage === 'discount' ? 'active' : ''; ?> ">
+              <svg class="bi me-2" width="16" height="16"></svg>
+              Discount
+            </a>
+          </li>
+          <li>
             <a href="#" class="nav-link text-white ">
               <svg class="bi me-2" width="16" height="16"></svg>
               Orders
