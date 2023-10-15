@@ -102,11 +102,12 @@
                     <th>Image</th>
                     <th>Edit</th>
                     <th>Delate</th>
+                    <th>Rating</th>
                 </tr>
             </thead>
             <tbody>
                 <?php 
-                $sql = "SELECT product_id,product_name,category_name,price,quantity,img_url FROM products,category WHERE products.category_id = category.category_id;";
+                $sql = "SELECT product_id,product_name,category_name,price,quantity,img_url,rating FROM products,category WHERE products.category_id = category.category_id;";
                 $result = $conn->query($sql);
                 if ($result->rowCount() > 0) {
                     $i=1;
@@ -130,7 +131,8 @@
                         echo "<a class='btn btn-warning' href='edit.php?product_id=" . $row["product_id"] . "'>Edit";
                         echo '<td class="text-center">';
                         echo "<a class='btn btn-danger' href='delete.php?product_id=" . $row["product_id"] . "' onclick='return confirm(\"แน่ใจหรือไม่ว่าต้องการลบข้อมูลนี้?\")'>Delete ";
-                        echo "</td>";
+                        echo '</td> ';
+                        echo '<td class="text-center">'.$row['rating'].'</td>';
                         echo '</tr>';
                         $i++;
                     }

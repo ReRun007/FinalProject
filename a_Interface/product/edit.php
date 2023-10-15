@@ -37,46 +37,60 @@
     <link rel="stylesheet" href="../../CSS/bg.css">
 </head>
 <body>
-    <div class="container mt-5">
-        <form action="edit_process.php" method="post">
-            <input type="hidden" name="coupon_id" value="<?php echo $coupon['coupon_id']; ?>">
-            <div class="container mt-1 bg-light rounded-5" style="height:400px;">
-                <br>
-                <h4>Edit Coupon</h4>
-                <div class="container mb-3 mt-3">
-                    <div class="row">
-                        <div class="col">
-                            <label for="coupon_code" class="form-label">Coupon Code</label>
-                            <input type="text" class="form-control" name="coupon_code" value="<?php echo $coupon['coupon_code']; ?>" maxlength="5">
-                        </div>
-                        <div class="col">
-                            <label for="discount_type" class="form-label">Discount Type</label>
-                            <select name="discount_type" class="form-select mb-3">
-                                <option value="Percentage" <?php if ($coupon['discount_type'] === 'Percentage') echo 'selected'; ?>>Percentage</option>
-                                <option value="Amount" <?php if ($coupon['discount_type'] === 'Amount') echo 'selected'; ?>>Amount</option>
-                            </select>
-                        </div>
-                        <div class="col">
-                            <label for="discount_amount" class="form-label">เปอร์เซ็น / จำนวนเงิน</label>
-                            <input type="number" class="form-control" name="discount_amount" value="<?php echo $coupon['discount_amount']; ?>">
-                        </div>
-                        <div class="col">
-                            <label for="min_purchase" class="form-label">Minimum Purchase</label>
-                            <input type="number" class="form-control" name="min_purchase" value="<?php echo $coupon['min_purchase']; ?>">
-                        </div>
-                        <div class="col">
-                            <label for="coupon_quantity" class="form-label">Coupon Quantity</label>
-                            <input type="number" class="form-control" name="coupon_quantity" value="<?php echo $coupon['coupon_quantity']; ?>">
-                        </div>
+
+<div class="container mt-5">
+    <form action="edit_process.php" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="product_id" value="<?php echo $product_id ?>">
+        <div class="container mt-1 bg-light rounded-5" style="height:500px;">
+            
+            <br><h4>Edit Product</h4>
+            <div class="container mb-3 mt-3" >
+                <div class="row">
+                    <div class="col">
+                        <label for="product_name" class="form-label">Product Name</label>
+                        <input type="text" class="form-control" name="product_name" value="<?php echo $product_name ?>">
                     </div>
+                    <div class="col">
+                        <label for="category" class="form-label">Category</label>
+                        <select name="category" class="form-select mb-3" aria-label="Large select example">
+                            <?php
+                                $sql = "SELECT category_id, category_name FROM category";
+                                $stmt = $conn->query($sql);
+                                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                    if($row['category_id'] == $category_id){
+                                        echo '<option value="' . $row['category_id'] . '" selected >' . $row['category_name'] . '</option>';
+                                    }else{
+                                        echo '<option value="' . $row['category_id'] . '">' . $row['category_name'] . '</option>';
+                                }                    
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label for="price" class="form-label">Product Price</label>
+                        <input type="number" class="form-control" name="price" value="<?php echo $price ?>">
+                        
+                    </div>
+                    <div class="col">
+                        <label for="quantity" class="form-label"> Quantity </label>
+                        <input type="number" class="form-control" name="quantity" value="<?php echo $quantity ?>">
+                    </div>    
                 </div>
-                <button type="submit" class="btn btn-outline-primary" name="edit_coupon">Save Changes</button>
-                <a href="view_discount.php" class="btn btn-danger">Cancel</a>
             </div>
-        </form>
-    </div>
+            <div class="container  mb-3">
+                <label for="img" class="form-label">Product Image</label>
+                <div class="mb-3">
+                    <img src="<?php echo $img; ?>" alt="Current Product Image" style="max-width: 100px; max-height: 100px;">
+                </div>
+                <input type="file" class="form-control" name="img" accept="image/gif, image/jpeg, image/png">
+                <p class="small mb-0 mt-2"><b>Note:</b> Only JPG, JPEG, GIF, PNG files are allowed to upload</p>
+            </div>
+            <button type="submit" class="btn btn-outline-primary" name="edit">Submit</button>
+            <a href="view_product.php" class="btn btn-danger">ย้อนกลับ</a>
+        </div>
+
+        
+    </form>
+</div>
 </body>
-
 </html>
-
-

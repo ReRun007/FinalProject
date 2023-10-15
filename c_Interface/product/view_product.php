@@ -84,8 +84,8 @@
 </body>
 </html>
 
-
 <script>
+    
     // ตัวกรองรายการสินค้าตามหมวดหมู่
     const categoryFilter = document.getElementById("categoryFilter");
     const productList = document.getElementById("productList");
@@ -101,8 +101,4 @@
             }
         }
     })
-
-    //เพิ่ม - ลด จำนวนสินค้า
-    
-
 </script>

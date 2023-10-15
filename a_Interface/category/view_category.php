@@ -65,7 +65,7 @@
             <?php } ?>
 
         <table class="table table-bordered table-hover align-middle">
-            <thead class="table-dark <a class='btn btn-danger' href='delete.php?category_id=" . $row["category_id"] . "' onclick='return confirm(\"แน่ใจหรือไม่ว่าต้องการลบข้อมูลนี้?\")'>Delatetext-center">
+            <thead class="table-dark text-center">
                 <tr>
                     <th>No.</th>
                     <th>Category Name</th>
@@ -88,7 +88,7 @@
                         echo '<td class="text-center">';
                         echo "<a class='btn btn-warning' href='edit.php?category_id=" . $row["category_id"] . "'>Edit";
                         echo '<td class="text-center">';
-                        echo " ";
+                        echo "<a class='btn btn-danger' href='delete.php?category_id=" . $row["category_id"] . "' onclick='return confirm(\"แน่ใจหรือไม่ว่าต้องการลบข้อมูลนี้?\")'>Delate ";
                         echo "</td>";
                         echo '</tr>';
                         $i++;

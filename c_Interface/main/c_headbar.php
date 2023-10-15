@@ -41,11 +41,10 @@ if (!isset($_SESSION['customer_login'])) {
                   <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                     <li><a href="../main/c_main.php" class="nav-link px-2 text-secondary">Home</a></li>
                     <li><a href="../product/view_product.php" class="nav-link px-2 text-white">Product</a></li>
+                    <li><a href="../order/view_order.php" class="nav-link px-2 text-white">Order</a></li>
                   </ul>
           
-                  <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-                    <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search">
-                  </form>
+
                   <a href="../cart/view_cart.php" class="btn btn-primary position-relative me-3">
                     ตะกร้าสินค้า
                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">

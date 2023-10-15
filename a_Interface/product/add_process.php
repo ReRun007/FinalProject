@@ -14,7 +14,14 @@ if (isset($_POST['add'])) {
     $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
     if (isset($_FILES['product_img'])) {
-        $check = getimagesize($_FILES['product_img']['tmp_name']);
+        if (!empty($_FILES['product_img']['tmp_name'])) {
+            $check = getimagesize($_FILES['product_img']['tmp_name']);
+        }else{
+            $_SESSION['error'] = "กรุณาอัปโหลดรูปภาพ";
+            header('Location: view_product.php');
+            exit();
+        }
+        
         if ($check !== false) {
             if ($imageFileType == 'jpg' || $imageFileType == 'jpeg' || $imageFileType == 'png' || $imageFileType == 'gif') {
                 if (move_uploaded_file($_FILES['product_img']['tmp_name'], $target_file)) {
