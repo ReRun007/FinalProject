@@ -90,6 +90,19 @@
                     ?>
                 </div>
             <?php } ?>
+            <div class="mb-3">
+                <label for="categoryFilter" class="form-label">เลือก Category</label>
+                    <select class="form-select" id="categoryFilter">
+                    <option value="">ทั้งหมด</option>
+                    <?php
+                        $sql = "SELECT category_id, category_name FROM category";
+                        $stmt = $conn->query($sql);
+                        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                            echo '<option value="' . $row['category_id'] . '">' . $row['category_name'] . '</option>';
+                        }
+                    ?>
+                    </select>
+            </div> 
 
         <table class="table table-bordered table-hover align-middle">
             <thead class="table-dark text-center">
@@ -107,12 +120,15 @@
             </thead>
             <tbody>
                 <?php 
-                $sql = "SELECT product_id,product_name,category_name,price,quantity,img_url,rating FROM products,category WHERE products.category_id = category.category_id;";
+                $sql = "SELECT product_id,product_name,category_name,category.category_id,price,quantity,img_url,rating
+                        FROM products,category 
+                        WHERE products.category_id = category.category_id
+                        ORDER BY product_name ASC";
                 $result = $conn->query($sql);
                 if ($result->rowCount() > 0) {
                     $i=1;
                     while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                        echo '<tr>';
+                        echo '<tr class="productRow" data-product-category="' . $row['category_id'] . '">';
                         echo '<td class="text-center">' . $i . '</td>';
                         echo '<td>' . $row['product_name'] . '</td>';
                         echo '<td>' . $row['category_name'] . '</td>';
@@ -144,6 +160,26 @@
 
         </table>
     </div>
+
+    <script>
+        // ตัวกรองรายการ Order ตาม Order category
+        const categoryFilter = document.getElementById("categoryFilter");
+        const productRows = document.querySelectorAll(".productRow");
+
+        categoryFilter.addEventListener("change", function() {
+            const selectedCategory = categoryFilter.value;
+            productRows.forEach(row => {
+                const rowCategory = row.getAttribute("data-product-category");
+                if (selectedCategory === "" || selectedCategory === rowCategory) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            });
+        });
+
+    </script>
+
 </body>
 </html>
 
