@@ -62,7 +62,7 @@
             </a>
           </li>
           <li>
-            <a href="#" class="nav-link text-white ">
+            <a href="../order/view_order.php" class="nav-link text-white <?php echo $currentPage === 'order' ? 'active' : ''; ?>">
               <svg class="bi me-2" width="16" height="16"></svg>
               Orders
             </a>

@@ -15,13 +15,5 @@
 </head>
 <body>
 
-    <?php 
-        foreach ($_SESSION['cart'] as $row) {
-            foreach ($row as $value) {
-                echo $value . ' '; // แสดงผลทุกค่าในแต่ละแถว
-            }
-            echo '<br>';
-        }
-    ?>
 </body>
 </html>

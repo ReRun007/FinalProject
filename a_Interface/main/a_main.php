@@ -47,7 +47,7 @@
         <ul>
             <li><a class="btn-large" href="../category/view_category.php">หมวดหมู่สินค้า</a></li>
             <li><a class="btn-large" href="../product/view_product.php">สินค้าทั้งหมด</a></li>
-            <li><a class="btn-large" href="view_customers.php">ตรวจสอบ Order</a></li>
+            <li><a class="btn-large" href="../order/view_order.php">ตรวจสอบ Order</a></li>
             <li><a class="btn-large" href="../discount/view_discount.php">จัดการส่วนลด</a></li>
             <li><a class="btn-large" href="view_customers.php">ตรวจสอบการชำระเงิน</a></li>
             <li><a class="btn-large" href="view_customers.php">ข้อมูลลูกค้า</a></li>

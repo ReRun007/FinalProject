@@ -16,8 +16,8 @@ if (isset($_POST['edit'])) {
 
         if (move_uploaded_file($_FILES['img']['tmp_name'], $target_file)) {
             // เมื่ออัปโหลดรูปภาพสำเร็จ
-
-            // ใช้ SQL UPDATE เพื่ออัปเดตข้อมูลสินค้าในฐานข้อมูล
+            
+            // ใช้ SQL UPDATE เพื่อ Update ข้อมูลสินค้าในฐานข้อมูล
             $sql = "UPDATE products SET product_name = :product_name, category_id = :category_id, price = :price, quantity = :quantity, img_url = :img_url WHERE product_id = :product_id";
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(':product_id', $product_id);
@@ -28,11 +28,11 @@ if (isset($_POST['edit'])) {
             $stmt->bindParam(':img_url', $target_file);
 
             if ($stmt->execute()) {
-                // อัปเดตสินค้าสำเร็จ
-                $_SESSION['success'] = "อัปเดตสินค้าเรียบร้อยแล้ว";
+                //  Update สินค้าสำเร็จ
+                $_SESSION['success'] = "Update สินค้า '".$product_name."' เรียบร้อยแล้ว";
             } else {
-                // มีข้อผิดพลาดในการอัปเดต
-                $_SESSION['error'] = "มีข้อผิดพลาดในการอัปเดตสินค้า";
+                // มีข้อผิดพลาดในการ Update 
+                $_SESSION['error'] = "มีข้อผิดพลาดในการ Update สินค้า";
             }
         } else {
             echo "ขออภัย, มีข้อผิดพลาดในการอัปโหลดรูปภาพ.";
@@ -41,7 +41,7 @@ if (isset($_POST['edit'])) {
         // ไม่มีการอัปโหลดรูปภาพใหม่ ให้ใช้รูปเดิมที่มี
         $img = $_POST['current_img'];
 
-        // ใช้ SQL UPDATE เพื่ออัปเดตข้อมูลสินค้าในฐานข้อมูล
+        // ใช้ SQL UPDATE เพื่อ Update ข้อมูลสินค้าในฐานข้อมูล
         $sql = "UPDATE products SET product_name = :product_name, category_id = :category_id, price = :price, quantity = :quantity, img_url = :img_url WHERE product_id = :product_id";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':product_id', $product_id);
@@ -52,11 +52,11 @@ if (isset($_POST['edit'])) {
         $stmt->bindParam(':img_url', $img);
 
         if ($stmt->execute()) {
-            // อัปเดตสินค้าสำเร็จ
+            //  Update สินค้าสำเร็จ
             $_SESSION['success'] = "Update สินค้า '".$product_name."' เรียบร้อยแล้ว";
         } else {
-            // มีข้อผิดพลาดในการอัปเดต
-            $_SESSION['error'] = "มีข้อผิดพลาดในการอัปเดตสินค้า";
+            // มีข้อผิดพลาดในการ Update 
+            $_SESSION['error'] = "มีข้อผิดพลาดในการ Update สินค้า";
         }
     }
 

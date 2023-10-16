@@ -23,15 +23,17 @@ if (isset($_SESSION['customer_login'])) {
         foreach ($cartItems as $item) {
             $productID = $item['product_id'];
             $quantity = $item['quantity'];
-            $totalPrice = $item['price'] * $quantity;
+            $onePrice = $item['price'];
+            $totalPrice = $onePrice * $quantity;
             
-            $sql = "INSERT INTO order_detail (orderID, product_id, od_quantity, total_price) 
-                    VALUES (:orderID, :product_id, :od_quantity, :total_price)";
+            $sql = "INSERT INTO order_detail (orderID, product_id, od_quantity, total_price,one_price) 
+                    VALUES (:orderID, :product_id, :od_quantity, :total_price, :one_price)";
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(':orderID', $orderID, PDO::PARAM_INT);
             $stmt->bindParam(':product_id', $productID, PDO::PARAM_INT);
             $stmt->bindParam(':od_quantity', $quantity, PDO::PARAM_INT);
             $stmt->bindParam(':total_price', $totalPrice, PDO::PARAM_STR);
+            $stmt->bindParam(':one_price', $onePrice, PDO::PARAM_STR);
             
             if ($stmt->execute()) {
                 // ลดสินค้าออกจากสต็อก (จำนวนคงเหลือลดลงตามจำนวนที่สั่ง)

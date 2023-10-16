@@ -80,6 +80,7 @@
             <div class="container  mb-3">
                 <label for="img" class="form-label">Product Image</label>
                 <div class="mb-3">
+                    <input type="hidden" name="current_img" value="<?php echo $img ?>">
                     <img src="<?php echo $img; ?>" alt="Current Product Image" style="max-width: 100px; max-height: 100px;">
                 </div>
                 <input type="file" class="form-control" name="img" accept="image/gif, image/jpeg, image/png">
