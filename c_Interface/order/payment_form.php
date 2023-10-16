@@ -12,7 +12,6 @@ if (!isset($_SESSION['customer_login'])) {
     exit;
 }
 
-
 $customerID = $_SESSION['customer_login'];
 $orderID = $_GET['order_id'];
 
@@ -88,25 +87,27 @@ $orderDetailList = $od_stmt->fetchAll(PDO::FETCH_ASSOC);
                 </tr>
             </thead>
             <tbody>
-                <?php $i = 1; foreach ($orderDetailList as $orderDetail): ?>
+                <?php $total=0; $i = 1;  foreach ($orderDetailList as $orderDetail): ?>
                 <tr>
                     <td><?php echo $i; ?></td>
                     <td><img src="<?php echo $orderDetail['img_url']; ?>" alt="Product Image" width="200"></td>
                     <td><?php echo $orderDetail['product_name']; ?></td>
-                    <td>Price: <?php echo $orderDetail['one_price']; ?></td>
-                    <td>Quantity: x<?php echo $orderDetail['od_quantity']; ?></td>
-                    <td>Total: <?php echo $orderDetail['total_price']; ?> บาท</td>
+                    <td><?php echo $orderDetail['one_price']; ?> บาท/ชิ้น</td>
+                    <td>x <?php echo $orderDetail['od_quantity']; ?> ชิ้น</td>
+                    <td> <?php echo $orderDetail['total_price']; ?> บาท</td>
                 </tr>
-                <?php $i += 1; endforeach; ?>
+                <?php $i += 1; $total=$total+$orderDetail['total_price']; endforeach; ?>
             </tbody>
         </table>
         <!-- End the table for order details -->
-
-        <p>Order Price: <?php echo $order['orderPrice']; ?> บาท</p>
+        <h4>Total Price: <?php echo $total; ?> </h4>
+        <h3>Discount: <?php echo $total-$order['orderPrice']; ?></h3>
+        <h2>Order Price: <?php echo $order['orderPrice']; ?> บาท</h2>
 
         <!-- แบบฟอร์มชำระเงิน (สร้างแบบฟอร์มให้ลูกค้ากรอกข้อมูลการชำระเงิน) -->
-        <form method="POST" enctype="multipart/form-data" action="payment_process.php">
+        <form action="payment_process.php" method="POST" enctype="multipart/form-data" >
             <input type="hidden" name="order_id" value="<?php echo $orderID; ?>">
+            <input type="hidden" name="bill_amount" value="<?php echo $order['orderPrice']; ?>">
             
             <!-- Add an input field for uploading the payment receipt image -->
             <div class="mb-3">

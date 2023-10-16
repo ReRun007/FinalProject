@@ -121,6 +121,12 @@ $orderList = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <?php else: ?>
                                 <button class="btn btn-danger" disabled>ชำระเงิน</button>
                             <?php endif; ?>
+                            <?php if ($order['orderStatus'] === 'Shipped'): ?>
+                                <a href="payment_form.php?order_id=<?php echo $order['orderID']; ?>" class="btn btn-success">ยืนยันการรับสินค้า</a>
+                            <?php else: ?>
+                                <button class="btn btn-success" disabled>ยืนยันการรับสินค้า</button>
+                            <?php endif; ?>
+                            
 
 
                         </div>

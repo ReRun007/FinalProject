@@ -9,7 +9,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product List</title>
+    <title>Order List</title>
     <link rel="stylesheet" href="../../CSS/bg.css">
     <link rel="stylesheet" href="../../CSS/table.css">
 </head>
@@ -19,7 +19,6 @@
         <h1>Order List</h1>       
         <!-- รายการ Order -->
         <div class="mb-3">
-            <h2>รายการ Order ของคุณ</h2>
             <label for="statusFilter" class="form-label">เลือกสถานะ Order</label>
             <select class="form-select" id="statusFilter">
                 <option value="">ทั้งหมด</option>
@@ -30,25 +29,26 @@
             </select>
         </div> 
         
-        <?php if(isset($_SESSION['success'])){ ?>
-            <div class="alert alert-success" role='alert'>
-                <?php 
-                    echo $_SESSION['success'];
-                    unset($_SESSION['success']);
-                ?>
-            </div>
-        <?php } ?>
-
-        <?php if(isset($_SESSION['error'])){ ?>
-            <div class="alert alert-danger" role='alert'>
-                <?php 
-                    echo $_SESSION['error'];
-                    unset($_SESSION['error']);
-                ?>
-            </div>
-        <?php } ?>
+        
 
         <table class="table table-bordered table-hover align-middle text-center">
+            <?php if(isset($_SESSION['success'])){ ?>
+                <div class="alert alert-success" role='alert'>
+                    <?php 
+                        echo $_SESSION['success'];
+                        unset($_SESSION['success']);
+                    ?>
+                </div>
+            <?php } ?>
+
+            <?php if(isset($_SESSION['error'])){ ?>
+                <div class="alert alert-danger" role='alert'>
+                    <?php 
+                        echo $_SESSION['error'];
+                        unset($_SESSION['error']);
+                    ?>
+                </div>
+            <?php } ?>
             <thead class="table-dark">
                 <tr>
                     <th>No.</th>
@@ -61,7 +61,7 @@
                     <th>Order Discount</th>
                     <th>Order Price</th>
                     <th>Order Status</th>
-                    <th>Edit Status</th>
+                    <th>Verify</th>
                 </tr>
             </thead>
             <tbody>
@@ -121,7 +121,13 @@
                         echo '<td>'. $discountOrder .' </td>';
                         echo '<td>'. $row['orderPrice'] .' </td>';
                         echo '<td>'. $row['orderStatus'] .' </td>';
-                        echo "<td> <a class='btn btn-warning' href='edit.php?orderID=" . $row["orderID"] . "'> Edit </td>";
+                        echo '<td>';
+                        if ($row['orderStatus'] === 'Verifying Payment') {
+                            echo "<a class='btn btn-warning' href='verify.php?orderID=" . $row["orderID"] . "'>Verify</a>";
+                        } else {
+                            echo "<a class='btn btn-warning disabled' href=''>Verify</a>";
+                        }
+                        echo '</td>';                    
                         echo '</tr>';
                         $i++;
                     }
