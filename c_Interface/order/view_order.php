@@ -33,7 +33,7 @@ $orderList = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <body>
     <div class="container mt-5 bg-white rounded">
         <!-- รายการ Order -->
-        <div class="mb-3 mt-5 ms-5 me-5 row">
+        <div class=" mt-5 ms-5 me-5 row">
             <h2 class="mt-5">รายการ Order ของคุณ</h2>
             <label for="statusFilter" class="form-label">เลือกสถานะ Order</label>
             <select class="form-select" id="statusFilter" >
@@ -42,9 +42,10 @@ $orderList = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <option value="Verifying Payment">Verifying Payment</option>
                 <option value="Shipped">Shipped</option>
                 <option value="Delivered">Delivered</option>
+                <option value="Success">Success</option>
             </select>
         </div>
-        <div class="mb-3 mt-5 ms-5 me-5 row" id="orderList">
+        <div class="mb-3 mt-3 ms-5 me-5 row" id="orderList">
             
             <?php if (isset($_SESSION['message'])): ?>
                 <div class="alert alert-success" role='alert'>
@@ -115,20 +116,35 @@ $orderList = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <p class="card-text">Order Discount: <?php echo $discountOrder; ?> บาท</p>
                             <p class="card-text">Order Price: <?php echo $order['orderPrice']; ?> บาท</p>
                             <p class="card-text">Order Status: <?php echo $order['orderStatus']; ?></p>
-                            <a href="view_order_detail.php?order_id=<?php echo $order['orderID']; ?>" class="btn btn-primary">รายละเอียด</a>
-                            <?php if ($order['orderStatus'] === 'Pending'): ?>
-                                <a href="payment_form.php?order_id=<?php echo $order['orderID']; ?>" class="btn btn-danger">ชำระเงิน</a>
-                            <?php else: ?>
-                                <button class="btn btn-danger" disabled>ชำระเงิน</button>
-                            <?php endif; ?>
-                            <?php if ($order['orderStatus'] === 'Shipped'): ?>
-                                <a href="payment_form.php?order_id=<?php echo $order['orderID']; ?>" class="btn btn-success">ยืนยันการรับสินค้า</a>
-                            <?php else: ?>
-                                <button class="btn btn-success" disabled>ยืนยันการรับสินค้า</button>
-                            <?php endif; ?>
+                            <div class="row text-center">
+                                <div class="col">
+                                    <a href="view_order_detail.php?order_id=<?php echo $order['orderID']; ?>" class="btn btn-primary">รายละเอียด</a>
+                                </div>
+                                <div class="col">
+                                    <?php if ($order['orderStatus'] === 'Pending'): ?>
+                                        <a href="payment_form.php?order_id=<?php echo $order['orderID']; ?>" class="btn btn-danger">ชำระเงิน</a>
+                                    <?php else: ?>
+                                        <button class="btn btn-outline-danger" disabled>ชำระเงิน</button>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                            <div class="row mt-1 text-center">
+                                <div class="col">
+                                    <?php if ($order['orderStatus'] === 'Shipped'): ?>
+                                        <a href="confirm_receipt.php?order_id=<?php echo $order['orderID']; ?>" class="btn btn-success" onclick="return confirm('ยืนยันการรับสินค้า?')">ยืนยันการรับสินค้า</a>
+                                    <?php else: ?>
+                                        <button class="btn btn-outline-success" disabled>ยืนยันการรับสินค้า</button>
+                                    <?php endif; ?>
+                                </div>
+                                <div class="col">
+                                    <?php if ($order['orderStatus'] === 'Delivered'): ?>
+                                        <a href="rating.php?order_id=<?php echo $order['orderID']; ?>" class="btn btn-warning">ให้คะแนน</a>
+                                    <?php else: ?>
+                                        <button class="btn btn-outline-warning" disabled>ให้คะแนน</button>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
                             
-
-
                         </div>
                     </div>
                 </div>

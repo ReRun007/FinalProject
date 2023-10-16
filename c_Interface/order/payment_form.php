@@ -45,7 +45,8 @@ $orderDetailList = $od_stmt->fetchAll(PDO::FETCH_ASSOC);
 </head>
 <body>
     <div class="container mt-5 bg-white rounded">
-        <h2 class="mt-5">ชำระเงินสำหรับคำสั่งซื้อ</h2>
+        <br>
+        <h2 class="mt-2">ชำระเงินสำหรับคำสั่งซื้อ</h2>
         <p>รายละเอียดคำสั่งซื้อ:</p>
         <p>Order Date: <?php echo $order['orderDate']; ?></p>
         
@@ -117,6 +118,7 @@ $orderDetailList = $od_stmt->fetchAll(PDO::FETCH_ASSOC);
             
             <button type="submit" class="btn btn-primary">ยืนยันการชำระเงิน</button>
         </form>
+        <br>
     </div>
 </body>
 </html>

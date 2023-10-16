@@ -34,12 +34,11 @@ if (!isset($_SESSION['customer_login'])) {
         <!-- โค้ดของ <header> จากไฟล์เดิม -->
             <div class="container">
                 <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                  <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                  <a href="" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
                       <img src="../../images/LogoEatKubTang.jpg" alt="Logo" height="45" style="border-radius: 5%;">
                   </a>
           
                   <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="../main/c_main.php" class="nav-link px-2 text-secondary">Home</a></li>
                     <li><a href="../product/view_product.php" class="nav-link px-2 text-white">Product</a></li>
                     <li><a href="../order/view_order.php" class="nav-link px-2 text-white">Order</a></li>
                   </ul>
@@ -71,7 +70,7 @@ if (!isset($_SESSION['customer_login'])) {
                     <ul class="dropdown-menu text-small text-center" style="">
                         <li><img src="<?php echo $row['img_URL']; ?>" alt="mdo" width="96" height="96" class="rounded-circle"></li>
                         <li><?php echo $row['username']; ?> </li>
-                        <li><a class="dropdown-item" href="#">Edit Profile</a></li>
+                        <li><a class="dropdown-item" href="../../customerLogin/edit.php">Edit Profile</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><button type="button" class="btn btn-outline-danger" onclick="logout('../../config/logout.php')">Logout</button></li>
                     </ul>

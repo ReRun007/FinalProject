@@ -1,6 +1,13 @@
 <?php 
     session_start();
     require_once '../config/bs5.php';
+
+    if(isset($_SESSION['customer_login'])){
+        header("location: ../c_Interface/main/c_main.php");
+    }else if(isset($_SESSION['employee_login'])){
+        header("location: ../a_interface/main/a_main.php");
+    }
+
 ?>
 
 <!DOCTYPE html>
