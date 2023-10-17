@@ -52,6 +52,7 @@ $realPrice = $totalPrice;
                         <th>ชื่อสินค้า</th>
                         <th>ราคา</th>
                         <th>จำนวน</th>
+                        <th>ราคารวม</th>
                         <th>Delete</th>
                     </tr>
                 </thead>
@@ -65,6 +66,7 @@ $realPrice = $totalPrice;
                             <td style="width: 100;">
                                 <input type="number" name="quantity[]" class="form-control text-center" value="<?php echo $item['quantity']; ?>" min="0" style="width: 100px;">
                             </td>
+                            <td><?php echo $item['price']*$item['quantity']; ?></td>
                             <td>
                                 <a class="btn btn-danger" href="delete.php?id=<?php echo $item['id'] ?>" onclick="return confirm('แน่ใจหรือไม่ว่าต้องการลบข้อมูลนี้?">Delete</a>
                             </td>

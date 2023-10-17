@@ -80,7 +80,7 @@
                 <label for="phone_number" class="form-label">Phone</label>
             </div>
             <div class="form-floating">
-                <textarea class="form-control" name="address" aria-describedby="address" placeholder="address" value="<?php echo $result['address']; ?>"></textarea>
+                <textarea class="form-control" name="address" aria-describedby="address" placeholder="address" ><?php echo $result['address']; ?></textarea>
                 <label for="address" class="form-label">Address</label>
             </div>   
             <div class="form-floating">
